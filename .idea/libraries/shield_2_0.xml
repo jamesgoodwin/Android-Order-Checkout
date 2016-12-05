@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="shield-2.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.judopay/shield/2.0/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.judopay/shield/2.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.judopay/shield/2.0/31b36c8b9dbb4872eb20823e787c211b0ac7dac6/shield-2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

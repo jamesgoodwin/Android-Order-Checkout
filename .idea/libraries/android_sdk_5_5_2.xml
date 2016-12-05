@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="android-sdk-5.5.2">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.judopay/android-sdk/5.5.2/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.judopay/android-sdk/5.5.2/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.judopay/android-sdk/5.5.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.judopay/android-sdk/5.5.2/6d78fe55b9ab1be8a1600e7be5b90f609b73176/android-sdk-5.5.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

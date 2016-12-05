@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">JudoPizza</string>
-    <string name="judo_pizza">Judo Pizza</string>
+    <string name="app_name">Judopay Pizza</string>
+    <string name="judo_pizza">Judopay Pizza</string>
+    <string name="review_your_order">Review your order</string>
+    <string name="order_summary">Order summary</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="card_fee">Card fee</string>
+    <string name="total">Total</string>
+    <string name="pay_now">Pay now</string>
 </resources>
