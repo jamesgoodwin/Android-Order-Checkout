@@ -85,4 +85,9 @@
         android:layout_marginTop="32dp"
         android:text="@string/pay_now" />
 
+    <FrameLayout
+        android:id="@+id/android_pay_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>
