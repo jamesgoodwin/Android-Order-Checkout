@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.judopay.pizzadelivery.OrderItem;
 import com.judopay.pizzadelivery.R;
@@ -44,6 +45,9 @@ public class OrderActivity extends AppCompatActivity implements OrderItemImageAd
     @Override
     public void onItemSelected(OrderItem orderItem) {
         this.orderItems.add(orderItem);
+
+        Toast.makeText(this, orderItem.getName() + " added to order", Toast.LENGTH_SHORT).show();
+
         setBadgeCount(this, cartMenuIcon, String.valueOf(orderItems.size()));
     }
 
@@ -62,10 +66,12 @@ public class OrderActivity extends AppCompatActivity implements OrderItemImageAd
 
         switch (item.getItemId()) {
             case R.id.action_cart:
-                Intent intent = new Intent(this, CheckoutActivity.class);
-                intent.putParcelableArrayListExtra(CheckoutActivity.ORDER_ITEMS_EXTRA, orderItems);
+                if (!orderItems.isEmpty()) {
+                    Intent intent = new Intent(this, CheckoutActivity.class);
+                    intent.putParcelableArrayListExtra(CheckoutActivity.ORDER_ITEMS_EXTRA, orderItems);
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);

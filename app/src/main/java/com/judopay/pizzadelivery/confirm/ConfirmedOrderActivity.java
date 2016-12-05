@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.judopay.pizzadelivery.R;
-import com.judopay.view.SingleClickOnClickListener;
 
 public class ConfirmedOrderActivity extends AppCompatActivity {
 
@@ -17,11 +16,10 @@ public class ConfirmedOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirmed_order);
 
         View doneButton = findViewById(R.id.done_button);
-
-        doneButton.setOnClickListener(new SingleClickOnClickListener() {
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void doClick() {
-                finish();
+            public void onClick(View view) {
+
             }
         });
     }
