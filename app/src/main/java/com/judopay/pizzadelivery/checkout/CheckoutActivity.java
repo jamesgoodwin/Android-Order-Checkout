@@ -55,10 +55,10 @@ public class CheckoutActivity extends AppCompatActivity {
 
         BigDecimal subtotal = getSubtotal(orderItems);
 
-        subtotalText.setText("£" + NUMBER_FORMAT.format(subtotal));
+        subtotalText.setText(getString(R.string.pounds_format, NUMBER_FORMAT.format(subtotal)));
         BigDecimal total = subtotal.add(new BigDecimal("0.25"));
 
-        totalText.setText("£" + NUMBER_FORMAT.format(total));
+        totalText.setText(getString(R.string.pounds_format, NUMBER_FORMAT.format(total)));
 
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +70,13 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private BigDecimal getSubtotal(List<? extends OrderItem> orderItems) {
         BigDecimal subtotal = new BigDecimal(0);
-        for(OrderItem orderItem : orderItems) {
+        for (OrderItem orderItem : orderItems) {
             subtotal = subtotal.add(orderItem.getPrice());
         }
         return subtotal;
     }
 
+    @SuppressWarnings("unused")
     public void showOrderConfirmation() {
         Intent intent = new Intent(this, ConfirmedOrderActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
