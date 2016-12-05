@@ -13,4 +13,7 @@
     <string name="pounds_format">£%s</string>
 
     <string name="public_key">BB1mttaH3YZAyiwF2kJj2SF6AnuQV6duIwAzfzeFamNLXt63SnYeeB78YN0UkaL9i7zg98jy0xaPTp+WwTQn3O4=</string>
+    <string name="android_pay_unavailable">Android Pay is unavailable</string>
+    <string name="error_code">Error code: %d</string>
+
 </resources>

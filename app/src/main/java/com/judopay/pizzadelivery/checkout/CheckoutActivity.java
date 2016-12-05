@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static com.google.android.gms.wallet.WalletConstants.RESULT_ERROR;
+
 public class CheckoutActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     public static final String ORDER_ITEMS_EXTRA = "OrderItems";
@@ -86,7 +88,7 @@ public class CheckoutActivity extends AppCompatActivity implements GoogleApiClie
                 .build();
 
         WalletFragmentOptions options = WalletFragmentOptions.newBuilder()
-                .setEnvironment(WalletConstants.ENVIRONMENT_PRODUCTION)
+                .setEnvironment(WalletConstants.ENVIRONMENT_TEST)
                 .setTheme(WalletConstants.THEME_LIGHT)
                 .setMode(WalletFragmentMode.BUY_BUTTON)
                 .build();
@@ -120,11 +122,23 @@ public class CheckoutActivity extends AppCompatActivity implements GoogleApiClie
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        int errorCode = -1;
+        if (data != null) {
+            errorCode = data.getIntExtra(WalletConstants.EXTRA_ERROR_CODE, -1);
+        }
+
         switch (requestCode) {
             case MASKED_WALLET_REQUEST:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    MaskedWallet maskedWallet = data.getParcelableExtra(WalletConstants.EXTRA_MASKED_WALLET);
-                    requestFullWallet(maskedWallet);
+                switch (resultCode) {
+                    case RESULT_OK:
+                        if (data != null) {
+                            MaskedWallet maskedWallet = data.getParcelableExtra(WalletConstants.EXTRA_MASKED_WALLET);
+                            requestFullWallet(maskedWallet);
+                        }
+                        break;
+                    case RESULT_ERROR:
+                        handleError(errorCode);
+                        break;
                 }
                 break;
             case FULL_WALLET_REQUEST:
@@ -151,11 +165,31 @@ public class CheckoutActivity extends AppCompatActivity implements GoogleApiClie
     private void createGoogleApiClient() {
         this.googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wallet.API, new Wallet.WalletOptions.Builder()
-                        .setEnvironment(WalletConstants.ENVIRONMENT_PRODUCTION)
+                        .setEnvironment(WalletConstants.ENVIRONMENT_TEST)
                         .build())
                 .enableAutoManage(this, this)
                 .build();
 
+    }
+
+    protected void handleError(int errorCode) {
+        switch (errorCode) {
+            case WalletConstants.ERROR_CODE_SPENDING_LIMIT_EXCEEDED:
+                Toast.makeText(this, "Spending limit exceeded", Toast.LENGTH_LONG).show();
+                break;
+            case WalletConstants.ERROR_CODE_INVALID_PARAMETERS:
+            case WalletConstants.ERROR_CODE_AUTHENTICATION_FAILURE:
+            case WalletConstants.ERROR_CODE_BUYER_ACCOUNT_ERROR:
+            case WalletConstants.ERROR_CODE_MERCHANT_ACCOUNT_ERROR:
+            case WalletConstants.ERROR_CODE_SERVICE_UNAVAILABLE:
+            case WalletConstants.ERROR_CODE_UNSUPPORTED_API_VERSION:
+            case WalletConstants.ERROR_CODE_UNKNOWN:
+            default:
+                String errorMessage = getString(R.string.android_pay_unavailable) + "\n" +
+                        getString(R.string.error_code, errorCode);
+                Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+                break;
+        }
     }
 
     private void initializeView(List<? extends OrderItem> orderItems) {
