@@ -1,5 +1,6 @@
 package com.judopay.pizzadelivery.checkout;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.judopay.pizzadelivery.OrderItem;
 import com.judopay.pizzadelivery.R;
+import com.judopay.pizzadelivery.cardscanning.CardScanningActivity;
 import com.judopay.pizzadelivery.confirm.ConfirmedOrderActivity;
 
 import java.math.BigDecimal;
@@ -69,9 +71,21 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    @SuppressWarnings("unused")
+    private PendingIntent getCardScanningIntent() {
+        Intent cardScanIntent = new Intent(CheckoutActivity.this, CardScanningActivity.class);
+        return PendingIntent.getActivity(CheckoutActivity.this, 1, cardScanIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+
     private void showErrorMessage() {
         Toast.makeText(this, "Error performing payment, please try again", Toast.LENGTH_LONG).show();
+    }
+
+    private void showOrderConfirmation() {
+        Intent intent = new Intent(this, ConfirmedOrderActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+
+        startActivity(intent);
+        finish();
     }
 
     private BigDecimal getSubtotal(List<? extends OrderItem> orderItems) {
@@ -80,15 +94,6 @@ public class CheckoutActivity extends AppCompatActivity {
             subtotal = subtotal.add(orderItem.getPrice());
         }
         return subtotal;
-    }
-
-    @SuppressWarnings("unused")
-    public void showOrderConfirmation() {
-        Intent intent = new Intent(this, ConfirmedOrderActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
-
-        startActivity(intent);
-        finish();
     }
 
 }
