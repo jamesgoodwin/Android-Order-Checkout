@@ -7,4 +7,7 @@
     <string name="card_fee">Card fee</string>
     <string name="total">Total</string>
     <string name="pay_now">Pay now</string>
+    <string name="thanks_for_your_order_a_delivery_to_your_address_will_be_made_in">Thanks for your order! A delivery to your address will be made in:</string>
+    <string name="minutes">minutes</string>
+    <string name="done">Done</string>
 </resources>

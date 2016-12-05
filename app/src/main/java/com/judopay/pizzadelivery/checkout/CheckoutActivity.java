@@ -1,5 +1,6 @@
 package com.judopay.pizzadelivery.checkout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.judopay.pizzadelivery.OrderItem;
 import com.judopay.pizzadelivery.R;
+import com.judopay.pizzadelivery.confirm.ConfirmedOrderActivity;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -75,7 +77,11 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     public void showOrderConfirmation() {
+        Intent intent = new Intent(this, ConfirmedOrderActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME);
 
+        startActivity(intent);
+        finish();
     }
 
 }
