@@ -25,7 +25,7 @@ class OrderItemPriceViewHolder extends RecyclerView.ViewHolder {
 
     void setOrderItem(OrderItem orderItem) {
         this.nameText.setText(orderItem.getName());
-        this.priceText.setText(FORMAT.format(orderItem.getPrice()));
+        this.priceText.setText("£" + FORMAT.format(orderItem.getPrice()));
     }
 
 }
